@@ -1,0 +1,13 @@
+{
+  "cols": [
+    {"id":"","label":"Country","pattern":"","type":"string"},
+    {"id":"","label":"MDMD Enabled","pattern":"","type":"number"}
+  ],
+  "rows": [
+    {"c":[{"v":"Germany","f":null},{"v":1,"f":null}]},
+    {"c":[{"v":"China","f":null},{"v":1,"f":null}]},
+    {"c":[{"v":"USA","f":null},{"v":1,"f":null}]},
+    {"c":[{"v":"Peru","f":null},{"v":1,"f":null}]},
+    {"c":[{"v":"RU","f":null},{"v":1,"f":null}]}
+  ]
+}
