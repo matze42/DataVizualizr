@@ -4,7 +4,8 @@
     {"id":"","label":"MDMD Enabled","pattern":"","type":"number"}
   ],
   "rows": [
-    {"c":[{"v":"Germany","f":null},{"v":1,"f":null}]},
+    {"c":[{"v":"France","f":null},{"v":1,"f":null}]},
+    {"c":[{"v":"Spain","f":null},{"v":1,"f":null}]},
     {"c":[{"v":"China","f":null},{"v":1,"f":null}]},
     {"c":[{"v":"USA","f":null},{"v":1,"f":null}]},
     {"c":[{"v":"Peru","f":null},{"v":1,"f":null}]},
