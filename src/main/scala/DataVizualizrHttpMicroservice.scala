@@ -65,7 +65,7 @@ trait Service {
           } ~
             path("schenker-countries-agents") {
               complete {
-                JsonMarshaller.googleChartsLiteral
+                GoogleChartsDataProvider.mdmData3()
               }
             }
           //          (get) {

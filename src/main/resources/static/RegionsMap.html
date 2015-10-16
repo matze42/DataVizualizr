@@ -1,0 +1,174 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        google.load('visualization', '1.0', {'packages':['controls']});
+        google.load("visualization", "1.1", {packages:["table"]});
+        google.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+
+            var jsonData = $.ajax({
+                url: "http://localhost:9000/api/schenker-countries-agents",
+                dataType: "json",
+                async: false
+            }).responseText;
+
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable(jsonData);
+
+            var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
+
+
+
+
+  var africaChart = new google.visualization.ChartWrapper({
+    'chartType': 'GeoChart',
+    'containerId': 'africa',
+    dataTable: data,
+    'options': {
+        'region': '002', // Africa
+      'width': 300,
+      'height': 300,
+      'colorAxis': {'colors': ['red', 'green', '#0000ff']},
+      'backgroundColor': '#ffffff',
+      'datalessRegionColor': '#ccccff',
+      'defaultColor': '#ffffff',
+      'legend': false
+    }
+  });
+
+  africaChart.draw();
+
+  var europeChart = new google.visualization.ChartWrapper({
+    'chartType': 'GeoChart',
+    'containerId': 'europe',
+    dataTable: data,
+    'options': {
+        region: '150', // Europe
+      'width': 300,
+      'height': 300,
+      'colorAxis': {'colors': ['red', 'green', '#0000ff']},
+      'backgroundColor': '#ffffff',
+      'datalessRegionColor': '#ccccff',
+      'defaultColor': '#ffffff',
+      'legend': false
+    }
+  });
+
+  europeChart.draw();
+
+  var americasChart = new google.visualization.ChartWrapper({
+    'chartType': 'GeoChart',
+    'containerId': 'americas',
+    dataTable: data,
+    'options': {
+        region: '019', // Americas
+      'width': 300,
+      'height': 300,
+      'colorAxis': {'colors': ['red', 'green', '#0000ff']},
+      'backgroundColor': '#ffffff',
+      'datalessRegionColor': '#ccccff',
+      'defaultColor': '#ffffff',
+      'legend': false
+    }
+  });
+
+  americasChart.draw();
+
+  var asiaChart = new google.visualization.ChartWrapper({
+    'chartType': 'GeoChart',
+    'containerId': 'asia',
+    dataTable: data,
+    'options': {
+        region: '142', // Asia
+      'width': 300,
+      'height': 300,
+      'colorAxis': {'colors': ['red', 'green', '#0000ff']},
+      'backgroundColor': '#ffffff',
+      'datalessRegionColor': '#ccccff',
+      'defaultColor': '#ffffff',
+      'legend': false
+    }
+  });
+
+  asiaChart.draw();
+
+    var oceaniaChart = new google.visualization.ChartWrapper({
+    'chartType': 'GeoChart',
+    'containerId': 'oceania',
+    dataTable: data,
+    'options': {
+        region: '009', // Oceania
+      'width': 300,
+      'height': 300,
+      'colorAxis': {'colors': ['red', 'green', '#0000ff']},
+      'backgroundColor': '#ffffff',
+      'datalessRegionColor': '#ccccff',
+      'defaultColor': '#ffffff',
+      'legend': false
+    }
+  });
+
+  oceaniaChart.draw();
+
+    var table = new google.visualization.Table(document.getElementById('table'));
+
+        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+   //dashboard.draw(data);
+
+
+  //         google.visualization.events.addListener(europeChart, 'ready', function () {
+    //         png.outerHTML = '<a href="' + dashboard.getImageURI() + '">Printable version</a>'
+ //              png.outerHTML = '<a href="' + '">Printable version</a>'
+      //     });
+
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+<!--Div that will hold the dashboard-->
+<div id="dashboard_div">
+    <table>
+        <!--Divs that will hold each control and chart-->
+        <tr>
+            <th>Africa</th>
+            <th>Europe</th>
+            <th>Americas</th>
+            <th>Asia</th>
+            <th>Oceania</th>
+        </tr>
+        <tr>
+            <td>
+                <div id="africa"></div>
+            </td>
+            <td>
+                <div id="europe"></div>
+            </td>
+            <td>
+                <div id="americas"></div>
+            </td>
+            <td>
+                <div id="asia"></div>
+            </td>
+            <td>
+                <div id="oceania"></div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5"><div id="table"></div></td>
+
+        </tr>
+    </table>
+</div>
+<div id='png'></div>
+<h1><a href="/">Back to Menu</a></h1></body>
+</html>
+
