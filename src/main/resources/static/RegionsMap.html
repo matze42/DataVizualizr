@@ -11,7 +11,7 @@
         function drawRegionsMap() {
 
             var jsonData = $.ajax({
-                url: "http://localhost:9000/api/schenker-countries-agents",
+                url: "/api/schenker-countries-agents",
                 dataType: "json",
                 async: false
             }).responseText;

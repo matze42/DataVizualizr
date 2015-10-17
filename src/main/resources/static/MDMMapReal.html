@@ -10,7 +10,7 @@
         function drawRegionsMap() {
 
             var jsonData = $.ajax({
-                url: "http://localhost:9000/api/mdm-countries",
+                url: "/api/mdm-countries",
                 dataType: "json",
                 async: false
             }).responseText;

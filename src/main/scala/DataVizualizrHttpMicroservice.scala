@@ -25,7 +25,7 @@ trait Service {
   val routes = {
     logRequestResult("akka-http-microservice") {
       pathSingleSlash {
-        getFromResource("static/index.html")
+        getFromResource("static/index-old.html")
       } ~
         pathPrefix("static") {
           // optionally compresses the response with Gzip or Deflate
