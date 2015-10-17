@@ -19,13 +19,6 @@ import scala.math._
 import spray.json.DefaultJsonProtocol
 import scala.io.Source
 
-
-//trait Protocols2 extends DefaultJsonProtocol {
-//  implicit val ipInfoFormat = jsonFormat5(IpInfo.apply)
-//  implicit val ipPairSummaryRequestFormat = jsonFormat2(IpPairSummaryRequest.apply)
-//  implicit val ipPairSummaryFormat = jsonFormat3(IpPairSummary.apply)
-//}
-
 trait Service {
   implicit val system: ActorSystem
 
@@ -45,12 +38,6 @@ trait Service {
       pathSingleSlash {
         getFromResource("static/index.html")
       } ~
-        pathPrefix("test") {
-          (get & path(Segment)) { name =>
-        complete {"DV: hello World"+name}
-      }
-
-        } ~
         pathPrefix("static") {
           // optionally compresses the response with Gzip or Deflate
           // if the client accepts compressed responses
@@ -61,18 +48,13 @@ trait Service {
         } ~
         pathPrefix("api") {
           path("test-data") {
-            getFromResource("static/data.json")
+            getFromResource(fileNAme)
           } ~
             path("schenker-countries-agents") {
               complete {
                 GoogleChartsDataProvider.mdmData3()
               }
             }
-          //          (get) {
-          //          complete {
-          //                  scala.io.Source.fromFile("/Users/matthiasheck/IdeaProjects/DataVizualizr/target/scala-2.11/classes/static/data.json").getLines.mkString
-          //                  }
-          //          }
         }
     }
   }

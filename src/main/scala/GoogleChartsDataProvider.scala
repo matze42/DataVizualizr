@@ -4,9 +4,7 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import scala.collection.mutable.ListBuffer
 
 case class GC_Col(id: Option[String], label: Option[String], pattern: Option[String], `type`: String)
-
 case class GC_Row(c: List[GC_Cell])
-
 case class GC_Cell(v: String, f: Option[String], p: Option[String])
 
 // TODO add property "p"
@@ -19,26 +17,10 @@ trait GC_DataJsonProtocol extends DefaultJsonProtocol {
   implicit val formatGC_Data = jsonFormat2(GC_Data.apply)
 }
 
-case class Country(country: String, isAgent: Boolean)
-
-trait CountryJsonProtocol extends DefaultJsonProtocol {
-  implicit val formatCountry = jsonFormat2(Country.apply)
-}
-
-class GoogleChartsDataProvider extends CountryJsonProtocol {
-  val source = scala.io.Source.fromURL(getClass.getResource("static/SchenkerCountries.json"))
-  val countries: List[Country] = source.mkString.parseJson.convertTo[List[Country]]
-
-
-}
-
 object GoogleChartsDataProvider extends GC_DataJsonProtocol {
 
   case class Col(label: Option[String], pattern: Option[String], gc_type: String)
-
   case class Row(country: String, value: Int)
-
-  val helper = new GoogleChartsDataProvider()
 
   def mdmData3() = {
     // Reference for Google Chart Data Structure
@@ -55,7 +37,7 @@ object GoogleChartsDataProvider extends GC_DataJsonProtocol {
     }
 
     val rows = new ListBuffer[Row]
-    for (c <- helper.countries) {
+    for (c <- MDM_DataProvider.countries) {
       rows += Row(c.country, if (c.isAgent) 1 else 2)
     }
     //    val rows = List(Row("France", 1), Row("Spain", 2), Row("China", 3))
@@ -67,6 +49,8 @@ object GoogleChartsDataProvider extends GC_DataJsonProtocol {
 
     GC_Data(spalten.toList, zeilen.toList).toJson
   }
+
+
 
   def mdmData2() = {
     // Reference for Google Chart Data Structure
