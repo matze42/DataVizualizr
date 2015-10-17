@@ -52,7 +52,7 @@ trait Service {
           } ~
             path("schenker-countries-agents") {
               complete {
-                GoogleChartsDataProvider.mdmData3()
+                MDM_DataProvider.mdmData3()
               }
             }
         }
