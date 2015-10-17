@@ -37,7 +37,7 @@ object MDM_DataProvider extends CountryJsonProtocol {
     var temp = new ListBuffer[MDMCountry]
     for (c <- countries
          if !c.isAgent) {
-      temp += MDMCountry(c.country, false)
+      temp += MDMCountry(c.country, live=false)
     }
     temp.toList ::: mdmCountries
   }
