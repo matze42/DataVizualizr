@@ -1,10 +1,10 @@
 [
   {
     "country": "US",
-    "isAgent": false
+    "live": true
   },
   {
     "country": "CA",
-    "isAgent": false
+    "live": true
   }
 ]

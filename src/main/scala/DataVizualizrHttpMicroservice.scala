@@ -52,7 +52,12 @@ trait Service {
           } ~
             path("schenker-countries-agents") {
               complete {
-                MDM_DataProvider.mdmData3()
+                MDM_DataProvider.schenkerCountries()
+              }
+            }~
+            path("mdm-countries") {
+              complete {
+                MDM_DataProvider.mdmData()
               }
             }
         }
