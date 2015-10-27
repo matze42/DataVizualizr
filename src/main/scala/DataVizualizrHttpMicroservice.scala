@@ -5,6 +5,7 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.{ActorMaterializer, Materializer}
 import com.typesafe.config.{Config, ConfigFactory}
+import view.
 
 import scala.concurrent.ExecutionContextExecutor
 
@@ -26,7 +27,7 @@ trait Service {
     logRequestResult("akka-http-microservice") {
       pathSingleSlash {
         getFromResource("static/index-old.html")
-      } ~
+      }~
         pathPrefix("static") {
           // optionally compresses the response with Gzip or Deflate
           // if the client accepts compressed responses
@@ -41,6 +42,7 @@ trait Service {
           } ~
             path("schenker-countries-agents") {
               complete {
+html.twirltest.render()
                 MDM_DataProvider.schenkerCountries()
               }
             }~
