@@ -1,0 +1,36 @@
+@(api: String,  target_div_chart: String, target_div_printable_link: String)
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+        google.load("visualization", '1', {packages: ['corechart']});
+        google.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+
+            var jsonData = $.ajax({
+                url: "@api",
+                dataType: "json",
+                async: false
+            }).responseText;
+
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable(jsonData);
+
+
+            var options = {
+                colorAxis: {colors: ['#ccccff', '#5555ff']},
+                backgroundColor: '#ffffff',
+                datalessRegionColor: '#eeeeff',
+                defaultColor: '#ffffff',
+                legend: false
+
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('@target_div_chart'));
+            chart.draw(data, options);
+
+            google.visualization.events.addListener(chart, 'ready', function () {
+                png.outerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>'
+            });
+        }
+</script>

@@ -7,7 +7,8 @@ import akka.stream.{ActorMaterializer, Materializer}
 import com.typesafe.config.{Config, ConfigFactory}
 
 import scala.concurrent.ExecutionContextExecutor
-import play.twirl.api.{ Xml, Txt, Html }
+
+import play.twirl.api.{Xml, Txt, Html}
 import akka.http.scaladsl.marshalling.{Marshaller, ToEntityMarshaller}
 import akka.http.scaladsl.model.MediaTypes._
 import akka.http.scaladsl.model.ContentType
@@ -25,7 +26,7 @@ trait TwirlSupport {
   implicit val twirlXmlMarshaller = twirlMarshaller[Xml](`text/xml`)
 
   /** Serialize Twirl formats to `String`. */
-  protected def twirlMarshaller[A <: AnyRef: Manifest](contentType: ContentType): ToEntityMarshaller[A] =
+  protected def twirlMarshaller[A <: AnyRef : Manifest](contentType: ContentType): ToEntityMarshaller[A] =
     Marshaller.StringMarshaller.wrap(contentType)(_.toString)
 
 }
@@ -44,17 +45,22 @@ trait Service extends TwirlSupport {
   val fileNAme = "static/data.json"
 
 
-
   val routes = {
     logRequestResult("akka-http-microservice") {
       pathSingleSlash {
         getFromResource("static/index-old.html")
-      }~
-        pathPrefix("twirl"){
-
-            complete(html.twirltest.render(List(1,2,3) ) )
-
-        }~
+      } ~
+        pathPrefix("staticAdminLTE") {
+          path("main") {
+            complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
+          }~
+          path("MDMCountries"){
+            complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
+          }~
+          path("SchenkerCountries"){
+            complete(html.main.render("/api/schenker-countries-agents", "regions_div", "png"))
+          }
+        } ~
         pathPrefix("static") {
           // optionally compresses the response with Gzip or Deflate
           // if the client accepts compressed responses
@@ -69,10 +75,10 @@ trait Service extends TwirlSupport {
           } ~
             path("schenker-countries-agents") {
               complete {
-//html.twirltest.render()
+                //html.twirltest.render()
                 MDM_DataProvider.schenkerCountries()
               }
-            }~
+            } ~
             path("mdm-countries") {
               complete {
                 MDM_DataProvider.mdmData()
