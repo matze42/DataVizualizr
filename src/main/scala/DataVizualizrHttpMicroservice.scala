@@ -5,11 +5,32 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.{ActorMaterializer, Materializer}
 import com.typesafe.config.{Config, ConfigFactory}
-import view.
 
 import scala.concurrent.ExecutionContextExecutor
+import play.twirl.api.{ Xml, Txt, Html }
+import akka.http.scaladsl.marshalling.{Marshaller, ToEntityMarshaller}
+import akka.http.scaladsl.model.MediaTypes._
+import akka.http.scaladsl.model.ContentType
 
-trait Service {
+trait TwirlSupport {
+  //https://github.com/btomala/akka-http-twirl
+
+  /** Serialize Twirl `Html` to `text/html`. */
+  implicit val twirlHtmlMarshaller = twirlMarshaller[Html](`text/html`)
+
+  /** Serialize Twirl `Txt` to `text/plain`. */
+  implicit val twirlTxtMarshaller = twirlMarshaller[Txt](`text/plain`)
+
+  /** Serialize Twirl `Xml` to `text/xml`. */
+  implicit val twirlXmlMarshaller = twirlMarshaller[Xml](`text/xml`)
+
+  /** Serialize Twirl formats to `String`. */
+  protected def twirlMarshaller[A <: AnyRef: Manifest](contentType: ContentType): ToEntityMarshaller[A] =
+    Marshaller.StringMarshaller.wrap(contentType)(_.toString)
+
+}
+
+trait Service extends TwirlSupport {
   implicit val system: ActorSystem
 
   implicit def executor: ExecutionContextExecutor
@@ -23,11 +44,17 @@ trait Service {
   val fileNAme = "static/data.json"
 
 
+
   val routes = {
     logRequestResult("akka-http-microservice") {
       pathSingleSlash {
         getFromResource("static/index-old.html")
       }~
+        pathPrefix("twirl"){
+
+            complete(html.twirltest.render(List(1,2,3) ) )
+
+        }~
         pathPrefix("static") {
           // optionally compresses the response with Gzip or Deflate
           // if the client accepts compressed responses
@@ -42,7 +69,7 @@ trait Service {
           } ~
             path("schenker-countries-agents") {
               complete {
-html.twirltest.render()
+//html.twirltest.render()
                 MDM_DataProvider.schenkerCountries()
               }
             }~
