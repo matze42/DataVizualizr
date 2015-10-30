@@ -1,6 +1,5 @@
 import MDM_DataProvider.{Row, Col}
 import spray.json._
-import scala.collection.mutable.ListBuffer
 
 case class GC_Col(id: Option[String], label: Option[String], pattern: Option[String], `type`: String)
 
@@ -24,17 +23,8 @@ trait GC_DataJsonProtocol extends DefaultJsonProtocol {
 object GoogleChartsDataProvider extends GC_DataJsonProtocol {
 
   def gc_data(cols: List[Col], rows: List[Row]) = {
-    val spalten = createCols(cols)
-    val zeilen = createRows(rows)
-    GC_Data(spalten, zeilen, None).toJson
+    val gc_cols = cols.zipWithIndex.map(a => GC_Col(Some("col_" + a._2), a._1.label, a._1.pattern, a._1.gc_type))
+    val gc_rows = rows.zipWithIndex.map(a => GC_Row(List(GC_Cell(a._1.country, None, None), GC_Cell(a._1.value.toString, None, None))))
+    GC_Data(gc_cols, gc_rows, None).toJson
   }
-
-  def createCols(cols: List[Col]) = {
-    cols.zipWithIndex.map(a => GC_Col(Some("col_" + a._2), a._1.label, a._1.pattern, a._1.gc_type))
-  }
-
-  def createRows(rows: List[Row]) = {
-    rows.zipWithIndex.map(a => GC_Row(List(GC_Cell(a._1.country, None, None), GC_Cell(a._1.value.toString, None, None))))
-  }
-
 }

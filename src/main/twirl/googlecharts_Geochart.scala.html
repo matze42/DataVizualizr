@@ -30,7 +30,7 @@
             chart.draw(data, options);
 
             google.visualization.events.addListener(chart, 'ready', function () {
-                png.outerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>'
+                @(target_div_printable_link).outerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>'
             });
         }
 </script>

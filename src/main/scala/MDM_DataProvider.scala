@@ -1,8 +1,6 @@
 import spray.json.DefaultJsonProtocol
 import spray.json._
 
-import scala.collection.mutable.ListBuffer
-
 case class Country(country: String, isAgent: Boolean)
 
 case class MDMCountry(country: String, live: Boolean)
@@ -25,31 +23,19 @@ object MDM_DataProvider extends CountryJsonProtocol {
 
   def mdmData() = {
     val cols = List(Col(Some("Country"), None, "string"), Col(Some("MDM Enabled"), None, "number"))
-    val rows = new ListBuffer[Row]
-    for (c <- wurst()) {
-      rows += Row(c.country, if (c.live) 2 else 1)
-    }
-    GoogleChartsDataProvider.gc_data(cols, rows.toList)
+    val rows = mdmSchenkerCountriesMerged().map(c => Row(c.country, if (c.live) 2 else 1))
+    GoogleChartsDataProvider.gc_data(cols, rows)
   }
 
-  def wurst() = {
-
-    var temp = new ListBuffer[MDMCountry]
-    for (c <- countries
-         if !c.isAgent) {
-      temp += MDMCountry(c.country, live=false)
-    }
-    temp.toList ::: mdmCountries
+  private def mdmSchenkerCountriesMerged() = {
+    countries.filter(c => !c.isAgent && !mdmCountries.exists(m => m.country == c.country)).map(c => MDMCountry(c.country, live = false)) ::: mdmCountries
   }
-
 
   def schenkerCountries() = {
     val cols = List(Col(Some("Country"), None, "string"), Col(Some("Agent = 1 / Schenker = 2"), None, "number"))
-    val rows = new ListBuffer[Row]
-    for (c <- countries) {
-      rows += Row(c.country, if (c.isAgent) 1 else 2)
-    }
-    GoogleChartsDataProvider.gc_data(cols, rows.toList)
+    val rows = countries.map(c => Row(c.country, if (c.isAgent) 1 else 2))
+    GoogleChartsDataProvider.gc_data(cols, rows)
   }
+
 }
 
