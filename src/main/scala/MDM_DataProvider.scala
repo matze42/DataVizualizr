@@ -21,7 +21,8 @@ object MDM_DataProvider extends CountryJsonProtocol {
   val odmCountries: List[ServiceCountryLive] = odmCountriesSource.mkString.parseJson.convertTo[List[ServiceCountryLive]]
 
   def mdmData() = {
-    val cols = List(Col(Some("Country"), None, "string", Some("Domain")), Col(Some("MDM Enabled"), None, "number", Some("Data")))
+    val cols = List(Col(Some("Country"), None, "string", Some("Domain")), Col(Some("MDM Enabled"), None, "number", Some("Data")),
+      Col(Some("Tooltip"), None, "string", Some("tooltip")))
     val rows = mdmSchenkerCountriesMerged().map(c => Row(c.country, if (c.live) 2 else 1, MasterDataProvider.getCountryName(c.country)))
     GoogleChartsDataProvider.gc_data(cols, rows)
   }
@@ -31,7 +32,8 @@ object MDM_DataProvider extends CountryJsonProtocol {
   }
 
   def odmData() = {
-    val cols = List(Col(Some("Country"), None, "string", Some("Domain")), Col(Some("ODM used"), None, "number", Some("Data")))
+    val cols = List(Col(Some("Country"), None, "string", Some("Domain")), Col(Some("ODM used"), None, "number", Some("Data")),
+      Col(Some("Tooltip"), None, "string", Some("tooltip")))
     val rows = odmSchenkerCountriesMerged().map(c => Row(c.country, if (c.live) 2 else 1, MasterDataProvider.getCountryName(c.country)))
     GoogleChartsDataProvider.gc_data(cols, rows)
   }
@@ -41,7 +43,8 @@ object MDM_DataProvider extends CountryJsonProtocol {
   }
 
   def schenkerCountries() = {
-    val cols = List(Col(Some("Country"), None, "string", Some("Domain")), Col(Some("Agent = 1 / Schenker = 2"), None, "number", Some("Data")))
+    val cols = List(Col(Some("Country"), None, "string", Some("Domain")), Col(Some("Agent = 1 / Schenker = 2"), None, "number", Some("Data")),
+      Col(Some("Tooltip"), None, "string", Some("tooltip")))
     val rows = countries.map(c => Row(c.country, if (c.isAgent) 1 else 2, MasterDataProvider.getCountryName(c.country)))
     GoogleChartsDataProvider.gc_data(cols, rows)
   }
