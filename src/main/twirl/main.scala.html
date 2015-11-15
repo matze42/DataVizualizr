@@ -1,4 +1,4 @@
-@(api: String,  target_div_chart: String, target_div_printable_link: String)
+@(api: String,  target_div_chart: String, target_div_printable_link: String, page_header: String)
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -59,7 +59,7 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="index.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -248,25 +248,18 @@ desired effect
             </form>
             <!-- /.search form -->
 
-            @sidebarmenu.render()
+            @sidebarmenu.render(api)
 
         </section>
         <!-- /.sidebar -->
     </aside>
 
 
-    @content.render(target_div_chart, target_div_printable_link)
+    @content.render(target_div_chart, target_div_printable_link, page_header)
 
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-    </footer>
+    @footer.render()
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

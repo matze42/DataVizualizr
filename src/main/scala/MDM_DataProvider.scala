@@ -11,13 +11,13 @@ trait CountryJsonProtocol extends DefaultJsonProtocol {
 }
 
 object MDM_DataProvider extends CountryJsonProtocol {
-  val countriesSource = scala.io.Source.fromURL(getClass.getResource("static/SchenkerCountries.json"))
+  val countriesSource = scala.io.Source.fromURL(getClass.getResource("data/SchenkerCountries.json"))
   val countries: List[SchenkerCountry] = countriesSource.mkString.parseJson.convertTo[List[SchenkerCountry]]
 
-  val mdmCountriesSource = scala.io.Source.fromURL(getClass.getResource("static/MDMCountries.json"))
+  val mdmCountriesSource = scala.io.Source.fromURL(getClass.getResource("data/MDMCountries.json"))
   val mdmCountries: List[ServiceCountryLive] = mdmCountriesSource.mkString.parseJson.convertTo[List[ServiceCountryLive]]
 
-  val odmCountriesSource = scala.io.Source.fromURL(getClass.getResource("static/ODMCountries.json"))
+  val odmCountriesSource = scala.io.Source.fromURL(getClass.getResource("data/ODMCountries.json"))
   val odmCountries: List[ServiceCountryLive] = odmCountriesSource.mkString.parseJson.convertTo[List[ServiceCountryLive]]
 
   def mdmData() = {

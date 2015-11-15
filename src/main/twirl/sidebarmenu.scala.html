@@ -1,9 +1,30 @@
+@(api: String)
 <!-- Sidebar Menu -->
 <ul class="sidebar-menu">
     <li class="header">HEADER</li>
     <!-- Optionally, you can add icons to the links -->
-    <li><a href="MDMCountries"><i class="fa fa-link"></i> <span>MDM Countries</span></a></li>
-    <li><a href="ODMCountries"><i class="fa fa-link"></i> <span>ODM Countries</span></a></li>
-    <li><a href="SIMSCountries"><i class="fa fa-link"></i> <span>SIMS in use Countries</span></a></li>
-    <li class="active"><a href="SchenkerCountries"><i class="fa fa-link"></i> <span>Schenker Countries</span></a></li>
+    @if(api=="/api/mdm-countries") {
+    <li class="active">
+    } else {
+    <li>
+    }
+        <a href="MDMCountries"><i class="fa fa-link"></i> <span>MDM Countries</span></a></li>
+    @if(api=="/api/odm-countries") {
+    <li class="active">
+        } else {
+    <li>
+        }
+    <a href="ODMCountries"><i class="fa fa-link"></i> <span>ODM Countries</span></a></li>
+    @if(api=="/api/sims-countries") {
+    <li class="active">
+        } else {
+    <li>
+        }
+    <a href="SIMSCountries"><i class="fa fa-link"></i> <span>SIMS in use Countries</span></a></li>
+    <@if(api=="/api/schenker-countries-agents") {
+    <li class="active">
+        } else {
+    <li>
+        }
+    <a href="SchenkerCountries"><i class="fa fa-link"></i> <span>Schenker Countries</span></a></li>
 </ul><!-- /.sidebar-menu -->

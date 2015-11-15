@@ -19,67 +19,62 @@ trait Service extends TwirlSupport {
 
   val logger: LoggingAdapter
 
-  val fileNAme = "static/data.json"
-
-
   val routes = {
-    logRequestResult("akka-http-microservice") {
-      pathSingleSlash {
-        getFromResource("static/index.html")
-      } ~
-        pathPrefix("staticAdminLTE") {
-          path("main") {
-            complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
-          } ~
-            path("MDMCountries") {
-              complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
-            } ~
-            path("SchenkerCountries") {
-              complete(html.main.render("/api/schenker-countries-agents", "regions_div", "png"))
-            }~
-            path("SIMSCountries") {
-              complete(html.main.render("/api/sims-countries", "regions_div", "png"))
-            }~
-            path("ODMCountries") {
-              complete(html.main.render("/api/odm-countries", "regions_div", "png"))
-            }
+    // Logging ausgeschaltet durch auskommentieren
+    //  logRequestResult("akka-http-microservice") {
+    pathSingleSlash {
+      getFromResource("static/index.html")
+    } ~
+      pathPrefix("staticAdminLTE") {
+        path("main") {
+          complete(html.main.render("/api/mdm-countries", "regions_div", "png", "MDM Countries Live"))
         } ~
-        pathPrefix("static") {
-          // optionally compresses the response with Gzip or Deflate
-          // if the client accepts compressed responses
-          encodeResponse {
-            // serve up static content from a JAR ressource
-            getFromResourceDirectory("static")
+          path("MDMCountries") {
+            complete(html.main.render("/api/mdm-countries", "regions_div", "png", "MDM Countries Live"))
+          } ~
+          path("SchenkerCountries") {
+            complete(html.main.render("/api/schenker-countries-agents", "regions_div", "png", "Schenker & Agent Countries"))
+          } ~
+          path("SIMSCountries") {
+            complete(html.main.render("/api/sims-countries", "regions_div", "png", "Countries with SIMS Usage"))
+          } ~
+          path("ODMCountries") {
+            complete(html.main.render("/api/odm-countries", "regions_div", "png", "Countries with ODM Usage"))
+          }
+      } ~
+      pathPrefix("static") {
+        // optionally compresses the response with Gzip or Deflate
+        // if the client accepts compressed responses
+        encodeResponse {
+          // serve up static content from a JAR ressource
+          getFromResourceDirectory("static")
+        }
+      } ~
+      pathPrefix("api") {
+        path("schenker-countries-agents") {
+          complete {
+            //html.twirltest.render()
+            MDM_DataProvider.schenkerCountries()
           }
         } ~
-        pathPrefix("api") {
-          path("test-data") {
-            getFromResource(fileNAme)
+          path("mdm-countries") {
+            complete {
+              MDM_DataProvider.mdmData()
+            }
           } ~
-            path("schenker-countries-agents") {
-              complete {
-                //html.twirltest.render()
-                MDM_DataProvider.schenkerCountries()
-              }
-            } ~
-            path("mdm-countries") {
-              complete {
-                MDM_DataProvider.mdmData()
-              }
-            }~
-            path("sims-countries") {
+          path("sims-countries") {
             complete {
               SIMS_DataProvider.simsUsedData()
             }
-            }~
-            path("odm-countries") {
+          } ~
+          path("odm-countries") {
             complete {
               MDM_DataProvider.odmData()
             }
           }
-        }
-    }
+      }
   }
+  //  }
 }
 
 object DataVizualizrHttpMicroservice extends App with Service {

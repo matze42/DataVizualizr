@@ -31,7 +31,7 @@ object SIMS_DataProvider {
   var countrySIMS = Set.empty[String]
 
   def readSIMS_CSV(): Unit = {
-    val bufferedSource = io.Source.fromURL(getClass.getResource("static/active_employee_profile_per_company.csv"))
+    val bufferedSource = io.Source.fromURL(getClass.getResource("data/active_employee_profile_per_company.csv"))
 
     //      Country code;Company Name;COUS ID;No. of profiles
     //      AE;SCHENKER MIDDLE EAST FZE;AEDXBLE0004;20
@@ -56,29 +56,12 @@ object SIMS_DataProvider {
     val cols = List(Col(Some("Country"), None, "string", Some("domain")), Col(Some("SIMS Used"), None, "number", Some("data")),
       Col(Some("Tooltip"), None, "string", Some("tooltip")))
 
-    var countries = Set.empty[String]
-
-    var liveCountries: List[ServiceCountryLive] = List.empty[ServiceCountryLive]
-
-
     val otherCountries: List[ServiceCountryLive] = MDM_DataProvider.countries.filter(c => !countrySIMS.contains(c.country)).map(c => ServiceCountryLive(c.country, live = false))
 
     val allCountries = countrySIMS.map(c => ServiceCountryLive(c, live = true)).toList ::: otherCountries
-//    legalEntityInfo.foreach(p => countries += (p._2.countryCode))
-
-
-    //    val rows = countries.map(c => Row(c, 1, MasterDataProvider.getCountryName(c))).toList
-
-    val rows = allCountries.map(c => Row(c.country, if (c.live) 2 else 1, MasterDataProvider.getCountryName(c.country))).toList
+    val rows = allCountries.map(c => Row(c.country, if (c.live) 2 else 1, MasterDataProvider.getCountryName(c.country)))
     GoogleChartsDataProvider.gc_data(cols, rows)
   }
-
-  //
-  //  private def mdmSchenkerCountriesMerged() = {
-  //    countries.filter(c => !c.isAgent && !mdmCountries.exists(m => m.country == c.country)).map(c => MDMCountry(c.country, live = false)) ::: mdmCountries
-  //  }
-  //
-
 
 }
 

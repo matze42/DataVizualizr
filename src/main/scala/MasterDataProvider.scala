@@ -39,7 +39,7 @@ trait MasterCountryJsonProtocol extends DefaultJsonProtocol {
 }
 
 object MasterDataProvider extends MasterCountryJsonProtocol {
-  val origMasterCountriesSource = scala.io.Source.fromURL(getClass.getResource("static/country-codes.json"))
+  val origMasterCountriesSource = scala.io.Source.fromURL(getClass.getResource("data/country-codes.json"))
   val masterCountriesSource = origMasterCountriesSource.mkString.replaceAll("ISO3166-1-Alpha-2", "ISO3166_1_Alpha_2").replaceAll("ISO3166-1-Alpha-3", "ISO3166_1_Alpha_3").replaceAll("ISO3166-1-numeric", "ISO3166_1_numeric")
   val countries: List[MasterCountry] = masterCountriesSource.parseJson.convertTo[List[MasterCountry]]
 
