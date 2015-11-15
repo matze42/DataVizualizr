@@ -25,7 +25,7 @@ trait Service extends TwirlSupport {
   val routes = {
     logRequestResult("akka-http-microservice") {
       pathSingleSlash {
-        getFromResource("static/index-old.html")
+        getFromResource("static/index.html")
       } ~
         pathPrefix("staticAdminLTE") {
           path("main") {
