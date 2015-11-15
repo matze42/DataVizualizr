@@ -30,13 +30,19 @@ trait Service extends TwirlSupport {
         pathPrefix("staticAdminLTE") {
           path("main") {
             complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
-          }~
-          path("MDMCountries"){
-            complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
-          }~
-          path("SchenkerCountries"){
-            complete(html.main.render("/api/schenker-countries-agents", "regions_div", "png"))
-          }
+          } ~
+            path("MDMCountries") {
+              complete(html.main.render("/api/mdm-countries", "regions_div", "png"))
+            } ~
+            path("SchenkerCountries") {
+              complete(html.main.render("/api/schenker-countries-agents", "regions_div", "png"))
+            }~
+            path("SIMSCountries") {
+              complete(html.main.render("/api/sims-countries", "regions_div", "png"))
+            }~
+            path("ODMCountries") {
+              complete(html.main.render("/api/odm-countries", "regions_div", "png"))
+            }
         } ~
         pathPrefix("static") {
           // optionally compresses the response with Gzip or Deflate
@@ -60,7 +66,17 @@ trait Service extends TwirlSupport {
               complete {
                 MDM_DataProvider.mdmData()
               }
+            }~
+            path("sims-countries") {
+            complete {
+              SIMS_DataProvider.simsUsedData()
             }
+            }~
+            path("odm-countries") {
+            complete {
+              MDM_DataProvider.odmData()
+            }
+          }
         }
     }
   }

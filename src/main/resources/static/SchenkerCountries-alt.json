@@ -1,7 +1,6 @@
 [
 {"country":"HK", "isAgent":false},
 {"country":"PS", "isAgent":true},
-{"country":"HK", "isAgent":false},
 {"country":"PT", "isAgent":false},
 {"country":"HN", "isAgent":true},
 {"country":"PY", "isAgent":true},
@@ -100,12 +99,11 @@
 {"country":"MN", "isAgent":true},
 {"country":"EG", "isAgent":false},
 {"country":"MO", "isAgent":false},
-{"country":"MQ", "isAgent":false},
 {"country":"UY", "isAgent":true},
 {"country":"MR", "isAgent":true},
 {"country":"UZ", "isAgent":true},
 {"country":"MT", "isAgent":true},
-{"country":"MU", "isAgent":false},
+{"country":"MU", "isAgent":true},
 {"country":"MV", "isAgent":true},
 {"country":"MW", "isAgent":true},
 {"country":"MX", "isAgent":false},
@@ -123,7 +121,7 @@
 {"country":"NP", "isAgent":true},
 {"country":"FI", "isAgent":false},
 {"country":"FR", "isAgent":false},
-{"country":"NZ", "isAgent":false},
+{"country":"NZ", "isAgent":true},
 {"country":"GB", "isAgent":false},
 {"country":"GE", "isAgent":true},
 {"country":"OM", "isAgent":false},
@@ -134,5 +132,5 @@
 {"country":"PE", "isAgent":false},
 {"country":"PH", "isAgent":false},
 {"country":"PK", "isAgent":true},
-{"country":"PL", "isAgent":false}
+{"country":"PL", "isAgent":true}
 ]

@@ -9,7 +9,7 @@ case class Country(country: String, isAgent: Boolean)
 
 trait AddressJsonProtocol extends DefaultJsonProtocol {
   implicit val formatAddress = jsonFormat3(Adress.apply)
-  implicit val formatSC = jsonFormat2(Country.apply)
+  implicit val formatSC = jsonFormat2(SchenkerCountry.apply)
 }
 
 object Main extends App with AddressJsonProtocol {
