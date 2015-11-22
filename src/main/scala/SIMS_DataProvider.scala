@@ -51,17 +51,6 @@ object SIMS_DataProvider {
   }
 
 
-  def simsUsedData() = {
-    readSIMS_CSV()
-    val cols = List(Col(Some("Country"), None, "string", Some("domain")), Col(Some("SIMS Used"), None, "number", Some("data")),
-      Col(Some("Tooltip"), None, "string", Some("tooltip")))
-
-    val otherCountries: List[ServiceCountryLive] = MDM_DataProvider.countries.filter(c => !countrySIMS.contains(c.country)).map(c => ServiceCountryLive(c.country, live = false))
-
-    val allCountries = countrySIMS.map(c => ServiceCountryLive(c, live = true)).toList ::: otherCountries
-    val rows = allCountries.map(c => Row(c.country, if (c.live) 2 else 1, MasterDataProvider.getCountryName(c.country)))
-    GoogleChartsDataProvider.gc_data(cols, rows)
-  }
 
 }
 
