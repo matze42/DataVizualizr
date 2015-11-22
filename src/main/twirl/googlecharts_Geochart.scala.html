@@ -5,6 +5,11 @@
         google.load("visualization", '1', {packages: ['corechart']});
         google.setOnLoadCallback(drawRegionsMap);
 
+
+        var data;
+        var chart;
+        var options;
+
         function drawRegionsMap() {
 
             var jsonData = $.ajax({
@@ -14,10 +19,10 @@
             }).responseText;
 
             // Create our data table out of JSON data loaded from server.
-            var data = new google.visualization.DataTable(jsonData);
+             data = new google.visualization.DataTable(jsonData);
 
 
-            var options = {
+            options = {
                 colorAxis: {colors: ['#ccffcc', '#33aa33']},
                 backgroundColor: '#eeeeff',
                 datalessRegionColor: '#ffffff',
@@ -26,11 +31,44 @@
 
             };
 
-            var chart = new google.visualization.GeoChart(document.getElementById('@target_div_chart'));
+            chart = new google.visualization.GeoChart(document.getElementById('@target_div_chart'));
             chart.draw(data, options);
 
             google.visualization.events.addListener(chart, 'ready', function () {
-                @(target_div_printable_link).outerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>'
+                @(target_div_printable_link).innerHTML = '<a href="' + chart.getImageURI() + '">Printable version</a>'
             });
+
         }
+
+        function drawRegionsMapEurope() {
+           options['region']= '150';
+            chart.draw(data, options);
+        }
+
+        function drawRegionsMapAsia() {
+           options['region']= '142';
+            chart.draw(data, options);
+        }
+
+         function drawRegionsMapAfrica() {
+           options['region']= '002';
+            chart.draw(data, options);
+        }
+
+         function drawRegionsMapAmericas() {
+           options['region']= '019';
+            chart.draw(data, options);
+        }
+
+         function drawRegionsMapOceania() {
+           options['region']= '009';
+            chart.draw(data, options);
+        }
+
+
+        function drawRegionsMapWorld() {
+          delete  options['region'] ;
+          chart.draw(data, options);
+        }
+
 </script>
