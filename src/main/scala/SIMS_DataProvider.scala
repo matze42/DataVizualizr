@@ -1,6 +1,3 @@
-import spray.json.DefaultJsonProtocol
-import spray.json._
-
 
 /*
 Data Format
@@ -20,9 +17,7 @@ AE;Schenker Logistics L.L.C.;AEAUHLE0002;71
 
  */
 
-
 case class SIMSProfile(countryCode: String, companyName: String, COUS_Code: String, numberProfiles: Int)
-
 
 object SIMS_DataProvider {
 
@@ -49,8 +44,5 @@ object SIMS_DataProvider {
     }
     bufferedSource.close
   }
-
-
-
 }
 

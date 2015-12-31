@@ -1,23 +1,11 @@
 {
   "data": [
     {
-      "country": "MO",
-      "live": true
-    },
-    {
-      "country": "FR",
-      "live": true
-    },
-    {
-      "country": "SA",
-      "live": true
-    },
-    {
       "country": "AE",
       "live": true
     },
     {
-      "country": "AM",
+      "country": "AO",
       "live": true
     },
     {
@@ -33,7 +21,7 @@
       "live": true
     },
     {
-      "country": "BD",
+      "country": "BA",
       "live": true
     },
     {
@@ -41,23 +29,15 @@
       "live": true
     },
     {
-      "country": "BF",
-      "live": true
-    },
-    {
       "country": "BG",
       "live": true
     },
     {
-      "country": "BH",
-      "live": true
-    },
-    {
-      "country": "BO",
-      "live": true
-    },
-    {
       "country": "BR",
+      "live": true
+    },
+    {
+      "country": "BY",
       "live": true
     },
     {
@@ -77,18 +57,6 @@
       "live": true
     },
     {
-      "country": "CO",
-      "live": true
-    },
-    {
-      "country": "CR",
-      "live": true
-    },
-    {
-      "country": "CY",
-      "live": true
-    },
-    {
       "country": "CZ",
       "live": true
     },
@@ -98,10 +66,6 @@
     },
     {
       "country": "DK",
-      "live": true
-    },
-    {
-      "country": "EC",
       "live": true
     },
     {
@@ -121,7 +85,15 @@
       "live": true
     },
     {
+      "country": "FR",
+      "live": true
+    },
+    {
       "country": "GB",
+      "live": true
+    },
+    {
+      "country": "GH",
       "live": true
     },
     {
@@ -137,7 +109,7 @@
       "live": true
     },
     {
-      "country": "HN",
+      "country": "HR",
       "live": true
     },
     {
@@ -153,27 +125,11 @@
       "live": true
     },
     {
-      "country": "IL",
-      "live": true
-    },
-    {
       "country": "IN",
       "live": true
     },
     {
-      "country": "IS",
-      "live": true
-    },
-    {
       "country": "IT",
-      "live": true
-    },
-    {
-      "country": "IX",
-      "live": true
-    },
-    {
-      "country": "JO",
       "live": true
     },
     {
@@ -193,27 +149,11 @@
       "live": true
     },
     {
-      "country": "KW",
-      "live": true
-    },
-    {
-      "country": "KZ",
-      "live": true
-    },
-    {
       "country": "LA",
       "live": true
     },
     {
-      "country": "LB",
-      "live": true
-    },
-    {
       "country": "LK",
-      "live": true
-    },
-    {
-      "country": "LN",
       "live": true
     },
     {
@@ -233,11 +173,19 @@
       "live": true
     },
     {
+      "country": "MD",
+      "live": true
+    },
+    {
+      "country": "MK",
+      "live": true
+    },
+    {
       "country": "MM",
       "live": true
     },
     {
-      "country": "MU",
+      "country": "MO",
       "live": true
     },
     {
@@ -250,10 +198,6 @@
     },
     {
       "country": "NA",
-      "live": true
-    },
-    {
-      "country": "NI",
       "live": true
     },
     {
@@ -285,15 +229,7 @@
       "live": true
     },
     {
-      "country": "PK",
-      "live": true
-    },
-    {
       "country": "PL",
-      "live": true
-    },
-    {
-      "country": "PR",
       "live": true
     },
     {
@@ -314,6 +250,10 @@
     },
     {
       "country": "RU",
+      "live": true
+    },
+    {
+      "country": "SA",
       "live": true
     },
     {
@@ -341,19 +281,15 @@
       "live": true
     },
     {
-      "country": "TT",
-      "live": true
-    },
-    {
       "country": "TW",
       "live": true
     },
     {
-      "country": "US",
+      "country": "UA",
       "live": true
     },
     {
-      "country": "UY",
+      "country": "US",
       "live": true
     },
     {

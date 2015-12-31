@@ -1,10 +1,12 @@
-[
-  {
-    "country": "US",
-    "live": true
-  },
-  {
-    "country": "CA",
-    "live": true
-  }
-]
+{
+  "data": [
+    {
+      "country": "US",
+      "live": true
+    },
+    {
+      "country": "CA",
+      "live": true
+    }
+  ]
+}
